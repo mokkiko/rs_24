@@ -26,6 +26,8 @@ get '/' do
 end
 
 get '/about'do
+
+  @error = "something wrong"
   erb :about
 end
 
@@ -43,6 +45,10 @@ post '/visit' do
   sex.write"Новая запись в  #{@time1}\n"
   sex.write"User #{@username}, in chop at #{@user_date} к мастеру #{@barber}  будет краситься в #{@color}\n"
   sex.close
+  if @username == ""
+    @error = "Введите имя"
+    return erb :visit
+  end
 
   erb "Уважаемый дргу, #{@username}, вы записались #{@user_date} к мастеру #{@barber}  будет краситься в #{@color}\n"
 #  erb :visit
